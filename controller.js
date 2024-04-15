@@ -151,6 +151,10 @@ sortAddressesByDistance(addresses)
     const googleMapsUrl = generateGoogleMapsUrl(sortedAddresses);
     console.log("URL trasy w Google Maps:", googleMapsUrl);
 
+    var link = document.getElementById("link");
+    link.setAttribute("href", googleMapsUrl);
+    link.textContent = googleMapsUrl;
+
     // Otwarcie trasy w nowym oknie
     window.open(googleMapsUrl, "_blank");
   })
