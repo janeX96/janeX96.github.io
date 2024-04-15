@@ -2,14 +2,50 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Delivery route</title>
-    <link rel="stylesheet" href="style.scss" />
+    <title>js game</title>
+    <link rel="stylesheet" href="styles.css" />
   </head>
   <body>
-    <h1>Delivery route</h1>
-    <a id="link" href=""></a>
-
-    <script src="controller.js"></script>
+    <div class="game-container">
+      <div class="info" id="info">
+        <!-- <label for="nickname">Wpisz swój nick:</label
+        ><input id="nickname" type="text" />
+        <button onclick="saveScore()">Zapisz wynik</button> -->
+      </div>
+      <button class="reloadButton" id="reloadButton" onclick="reloadGame()">
+        Play again
+      </button>
+      <canvas
+        class="battlefield"
+        id="battlefield"
+        width="1000px"
+        height="500px"
+      >
+      </canvas>
+      <canvas class="base" id="base" width="100px" height="500px"></canvas>
+      <p>WAVE: <b id="waveNumber"></b></p>
+      <div class="score-board">
+        <div>
+          TIME
+          <br />
+          <b id="time"></b>
+        </div>
+        <div>
+          KILLS
+          <br />
+          <b id="kills"></b>
+        </div>
+        <div>
+          HP
+          <br />
+          <b id="hp" style="font-size: 25px"></b>
+        </div>
+      </div>
+    </div>
+    <div style="margin-left: 5%; font-size: 20px">
+      Best score:
+      <b id="bestScore"></b>
+    </div>
   </body>
+  <script src="scripts.js" defer></script>
 </html>

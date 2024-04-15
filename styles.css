@@ -1,0 +1,76 @@
+body {
+  margin: 0 0 0 0;
+  padding: 0;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.game-container {
+  width: 1100px;
+  height: 600px;
+  margin-top: 5%;
+  margin-left: 5%;
+  display: grid;
+  grid-template-columns: repeat(9, 1fr);
+  grid-auto-rows: minmax(100px, auto);
+  cursor: url("./scope.png"), default;
+}
+
+.battlefield {
+  border: 1px solid black;
+  grid-column: 1/9;
+  background-image: url("./images/battleground.png");
+  background-size: 600px 500px;
+}
+
+.base {
+  grid-column: 10;
+  border-top: 1px solid black;
+  border-bottom: 1px solid black;
+  border-right: 1px solid black;
+  background-image: url("./images/base.png");
+}
+
+.score-board {
+  margin-top: 1px;
+  border: 1px solid black;
+  height: 50px;
+  background-color: white;
+  grid-column-start: 9;
+  grid-column-end: 11;
+
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+}
+
+.info {
+  margin-left: 25%;
+  margin-top: 10%;
+  position: fixed;
+  width: 200px;
+  height: 50px;
+  z-index: 2;
+  display: none;
+  font-size: 50px;
+  color: red;
+}
+
+.reloadButton {
+  margin-left: 25%;
+  margin-top: 15%;
+  position: fixed;
+  width: 200px;
+  height: 50px;
+  z-index: 2;
+  display: none;
+  font-size: 32px;
+}
+
+.reloadButton {
+  background-color: lightgray;
+  border: 2px solid black;
+  border-radius: 5%;
+}
+.reloadButton:hover {
+  cursor: pointer;
+  text-decoration: underline;
+}
