@@ -27,11 +27,54 @@ function calculateSurebet(odd1, odd2, oddDraw = null, budget, taxRate = 0) {
   };
 }
 
+function validateInputs() {
+  let isValid = true;
+  const inputs = ["type1", "type2", "budget"]; // Lista wymaganych pól
+
+  inputs.forEach((id) => {
+    const inputContainer = document.getElementById(id).parentNode; // Pobierz kontener inputa
+    const input = document.getElementById(id);
+    const value = parseFloat(input.value);
+    let errorMessage = inputContainer.querySelector(".error-message");
+
+    if (!errorMessage) {
+      // Jeśli brak komunikatu, stwórz go
+      errorMessage = document.createElement("span");
+      errorMessage.className = "error-message";
+      errorMessage.textContent = "Pole wymagane";
+      inputContainer.appendChild(errorMessage);
+    }
+
+    if (isNaN(value) || value <= 0) {
+      input.classList.add("error");
+      errorMessage.style.display = "block"; // Wyświetl komunikat
+      isValid = false;
+    } else {
+      input.classList.remove("error");
+      errorMessage.style.display = "none"; // Ukryj komunikat
+    }
+  });
+
+  // Dodatkowa walidacja dla podatku
+  const taxRateInput = document.getElementById("taxRate");
+  if (taxRateInput.value === "") {
+    taxRateInput.value = "0"; // Ustaw domyślną wartość, jeśli puste
+  }
+
+  return isValid;
+}
+
 function calculate() {
+  if (!validateInputs()) {
+    return; // Zatrzymaj dalsze wykonanie, jeśli walidacja się nie powiedzie
+  }
+
   const odd1 = parseFloat(document.getElementById("type1").value);
   const odd2 = parseFloat(document.getElementById("type2").value);
   const oddDraw = parseFloat(document.getElementById("typeDraw").value) || null;
   const budget = parseFloat(document.getElementById("budget").value);
+  console.log(document.getElementById("taxRate").value);
+
   const taxRate = parseFloat(document.getElementById("taxRate").value);
 
   const result = calculateSurebet(odd1, odd2, oddDraw, budget, taxRate);

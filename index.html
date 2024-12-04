@@ -11,7 +11,7 @@
       <div class="form">
         <div class="input">
           <label for="type1">Kurs A</label>
-          <input id="type1" type="number" required />
+          <div><input id="type1" type="number" required /></div>
         </div>
         <div class="input">
           <label for="typeDraw">Remis</label>
@@ -19,11 +19,11 @@
         </div>
         <div class="input">
           <label for="type2">Kurs B</label>
-          <input id="type2" type="number" required />
+          <div><input id="type2" type="number" required /></div>
         </div>
         <div class="input">
           <label for="budget">Budżet</label>
-          <input id="budget" type="number" required />
+          <div><input id="budget" type="number" required /></div>
         </div>
         <div class="input">
           <label for="taxRate">Podatek (%)</label>
@@ -33,6 +33,8 @@
             id="taxRate"
             name="taxRate"
             step="0.01"
+            min="0"
+            value="0"
           />
         </div>
         <button class="button" onclick="calculate()">Sprawdź</button>

@@ -134,6 +134,22 @@ body {
   max-width: 100px;
 }
 
+.error {
+  border: 2px solid #ff0000; /* Intensywnie czerwony kolor */
+  box-shadow: 0 0 5px rgba(255, 0, 0, 0.5);
+}
+
+.error-message {
+  color: #ff0000; /* Czerwony kolor napisu */
+  font-size: 12px;
+  margin-top: 5px;
+  display: none; /* Domyślnie ukryty */
+}
+
+.input.error .error-message {
+  display: block; /* Wyświetlaj napis przy błędnych inputach */
+}
+
 @media (max-width: 768px) {
   .container {
     padding: 20px;
