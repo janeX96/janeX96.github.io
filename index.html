@@ -1,51 +1,72 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <meta charset="UTF-8" />
-    <title>js game</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Surebet Calculator</title>
     <link rel="stylesheet" href="styles.css" />
   </head>
   <body>
-    <div class="game-container">
-      <div class="info" id="info">
-        <!-- <label for="nickname">Wpisz swój nick:</label
-        ><input id="nickname" type="text" />
-        <button onclick="saveScore()">Zapisz wynik</button> -->
+    <div class="container">
+      <div class="form">
+        <div class="input">
+          <label for="type1">Kurs A</label>
+          <input id="type1" type="number" required />
+        </div>
+        <div class="input">
+          <label for="typeDraw">Remis</label>
+          <input id="typeDraw" type="number" />
+        </div>
+        <div class="input">
+          <label for="type2">Kurs B</label>
+          <input id="type2" type="number" required />
+        </div>
+        <div class="input">
+          <label for="budget">Budżet</label>
+          <input id="budget" type="number" required />
+        </div>
+        <div class="input">
+          <label for="taxRate">Podatek (%)</label>
+          <input
+            class="taxRate"
+            type="number"
+            id="taxRate"
+            name="taxRate"
+            step="0.01"
+          />
+        </div>
+        <button class="button" onclick="calculate()">Sprawdź</button>
+        <div
+          onclick="stop()"
+          class="papa"
+          style="display: none"
+          id="stopButton"
+        >
+          <img
+            src="https://assets.puzzlefactory.com/puzzle/293/329/original.webp"
+            alt="papa"
+          />
+        </div>
       </div>
-      <button class="reloadButton" id="reloadButton" onclick="reloadGame()">
-        Play again
-      </button>
-      <canvas
-        class="battlefield"
-        id="battlefield"
-        width="1000px"
-        height="500px"
-      >
-      </canvas>
-      <canvas class="base" id="base" width="100px" height="500px"></canvas>
-      <p>WAVE: <b id="waveNumber"></b></p>
-      <div class="score-board">
-        <div>
-          TIME
-          <br />
-          <b id="time"></b>
-        </div>
-        <div>
-          KILLS
-          <br />
-          <b id="kills"></b>
-        </div>
-        <div>
-          HP
-          <br />
-          <b id="hp" style="font-size: 25px"></b>
+      <div id="results" class="results">
+        <span>Kwota zysku: <span id="netProfit">0.00</span> zł</span>
+        <span>Stawka na pierwszy kurs: <span id="stake1">0.00</span></span>
+        <span>Stawka na drugi kurs: <span id="stake2">0.00</span></span>
+        <span id="stakeDrawRow" style="display: none"
+          >Stawka na remis: <span id="stakeDraw">0.00</span></span
+        >
+        <div class="summary">
+          <strong id="surebetStatus" class="surebetStatus"
+            >Surebet nie jest możliwy.</strong
+          >
+          <span class="profitPercent" id="profitPercent"></span>
         </div>
       </div>
+      <audio id="audioPlayer">
+        <source src="barka.mp3" type="audio/mpeg" />
+        Your browser does not support the audio element.
+      </audio>
     </div>
-    <div style="margin-left: 5%; font-size: 20px">
-      Best score:
-      <b id="bestScore"></b>
-    </div>
+    <script src="calc.js"></script>
   </body>
-  <script src="scripts.js" defer></script>
 </html>
