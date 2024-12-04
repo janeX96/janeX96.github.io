@@ -127,7 +127,7 @@ body {
 }
 
 .papa :hover {
-  cursor: url("http://www.rw-designer.com/cursor-extern.php?id=101646"), pointer;
+  cursor: url("target.png"), pointer;
 }
 
 .papa img {
