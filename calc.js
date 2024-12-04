@@ -112,16 +112,19 @@ function calculate() {
     document.getElementById("surebetStatus").classList.add("lose");
     stop();
     document.getElementById("stopButton").style.display = "none";
+
+    const audio = document.getElementById("brek");
+    audio.play();
   }
 }
 
 function play() {
-  const audio = document.getElementById("audioPlayer");
+  const audio = document.getElementById("barka");
   audio.play();
 }
 
 function stop() {
-  const audio = document.getElementById("audioPlayer");
+  const audio = document.getElementById("barka");
   audio.pause();
   audio.currentTime = 0;
   document.getElementById("stopButton").style.display = "none";
