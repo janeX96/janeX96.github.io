@@ -1,3 +1,5 @@
+let audio = null;
+
 function calculateSurebet(odd1, odd2, oddDraw = null, budget, taxRate = 0) {
   const surebetValue = oddDraw
     ? 1 / odd1 + 1 / odd2 + 1 / oddDraw
@@ -65,6 +67,10 @@ function validateInputs() {
 }
 
 function calculate() {
+  if (audio) {
+    stop();
+  }
+
   if (!validateInputs()) {
     return; // Zatrzymaj dalsze wykonanie, jeśli walidacja się nie powiedzie
   }
@@ -110,22 +116,31 @@ function calculate() {
     document.getElementById("surebetStatus").classList.remove("success");
     document.getElementById("profitPercent").classList.add("lose");
     document.getElementById("surebetStatus").classList.add("lose");
-    stop();
     document.getElementById("stopButton").style.display = "none";
 
-    const audio = document.getElementById("brek");
-    audio.play();
+    loss();
   }
 }
 
 function play() {
-  const audio = document.getElementById("barka");
+  audio = document.getElementById("barka");
   audio.play();
 }
 
 function stop() {
-  const audio = document.getElementById("barka");
   audio.pause();
   audio.currentTime = 0;
   document.getElementById("stopButton").style.display = "none";
+  audio = null;
+}
+
+function loss() {
+  const randomNumber = Math.floor(Math.random() * 3);
+  const audioId = `loss-${randomNumber}`;
+  audio = document.getElementById(audioId);
+  if (audio) {
+    audio.play();
+  } else {
+    console.error(`Element o ID "${audioId}" nie został znaleziony.`);
+  }
 }
