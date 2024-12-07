@@ -32,17 +32,13 @@ function calculateSurebet(
   const tax2 = taxRate2 !== null ? taxRate2 : taxRate;
   const taxDraw = taxRateDraw !== null ? taxRateDraw : taxRate;
 
-  console.log("tax1: ", tax1);
-  console.log("tax2: ", tax2);
   // Obliczenie wygranych po podatkach
   const win1 = stake1 * odd1 * (1 - tax1 / 100);
   const win2 = stake2 * odd2 * (1 - tax2 / 100);
   const winDraw = oddDraw ? stakeDraw * oddDraw * (1 - taxDraw / 100) : 0;
-  console.log("win1: ", win1);
-  console.log("win2: ", win2);
+
   // Znalezienie minimalnej wygranej netto
   const netWin = oddDraw ? Math.min(win1, win2, winDraw) : Math.min(win1, win2);
-  console.log("netWin", netWin);
 
   const netProfit = netWin - budget;
   const profitPercent = (netProfit / budget) * 100;
@@ -177,12 +173,31 @@ function stop() {
 }
 
 function loss() {
-  const randomNumber = Math.floor(Math.random() * 3);
-  const audioId = `loss-${randomNumber}`;
-  audio = document.getElementById(audioId);
-  if (audio) {
-    audio.play();
+  const scaryRandom = Math.random();
+  if (scaryRandom <= 0.05) {
+    audio = document.getElementById("scary-audio");
+    if (audio) {
+      audio.play();
+    } else {
+      console.error(`Element o ID "${audioId}" nie został znaleziony.`);
+    }
+    setTimeout(() => {
+      document.getElementById("scary").style.display = "block";
+      document.getElementById("container").style.display = "none";
+    }, 200);
+
+    setTimeout(() => {
+      document.getElementById("scary").style.display = "none";
+      document.getElementById("container").style.display = "flex";
+    }, 2000);
   } else {
-    console.error(`Element o ID "${audioId}" nie został znaleziony.`);
+    const randomNumber = Math.floor(Math.random() * 3);
+    const audioId = `loss-${randomNumber}`;
+    audio = document.getElementById(audioId);
+    if (audio) {
+      audio.play();
+    } else {
+      console.error(`Element o ID "${audioId}" nie został znaleziony.`);
+    }
   }
 }

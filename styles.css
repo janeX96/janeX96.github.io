@@ -177,6 +177,12 @@ body {
   display: block; /* Wyświetlaj napis przy błędnych inputach */
 }
 
+.scary {
+  display: none;
+  width: 100%;
+  height: 100%;
+}
+
 @media (max-width: 768px) {
   .container {
     padding: 20px;
