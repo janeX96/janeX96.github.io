@@ -8,48 +8,72 @@
   </head>
   <body>
     <div class="container">
-      <div class="form">
-        <div class="input">
-          <label for="type1">Kurs A</label>
-          <div><input id="type1" type="number" required /></div>
+      <div class="formWrapper">
+        <div class="form">
+          <div class="input">
+            <label for="type1">Kurs A</label>
+            <div><input id="type1" type="number" required /></div>
+          </div>
+          <div class="input">
+            <label for="typeDraw">Remis</label>
+            <input id="typeDraw" type="number" />
+          </div>
+          <div class="input">
+            <label for="type2">Kurs B</label>
+            <div><input id="type2" type="number" required /></div>
+          </div>
+          <div class="input">
+            <label for="budget">Budżet</label>
+            <div><input id="budget" type="number" required /></div>
+          </div>
+          <div class="input">
+            <label for="taxMode">Tryb podatku</label>
+            <select id="taxMode" onchange="toggleTaxInputs()">
+              <option value="common">Wspólny</option>
+              <option value="separate">Różne</option>
+            </select>
+          </div>
+          <div id="taxRateContainer" class="input">
+            <label for="taxRate">Podatek (%)</label>
+            <input
+              id="taxRate"
+              class="taxRate"
+              type="number"
+              name="taxRate"
+              step="0.01"
+              min="0"
+              value="0"
+            />
+          </div>
+          <button class="button" onclick="calculate()">Sprawdź</button>
+          <div
+            onclick="stop()"
+            class="papa"
+            style="display: none"
+            id="stopButton"
+          >
+            <img
+              src="https://assets.puzzlefactory.com/puzzle/293/329/original.webp"
+              alt="papa"
+            />
+          </div>
         </div>
-        <div class="input">
-          <label for="typeDraw">Remis</label>
-          <input id="typeDraw" type="number" />
-        </div>
-        <div class="input">
-          <label for="type2">Kurs B</label>
-          <div><input id="type2" type="number" required /></div>
-        </div>
-        <div class="input">
-          <label for="budget">Budżet</label>
-          <div><input id="budget" type="number" required /></div>
-        </div>
-        <div class="input">
-          <label for="taxRate">Podatek (%)</label>
-          <input
-            class="taxRate"
-            type="number"
-            id="taxRate"
-            name="taxRate"
-            step="0.01"
-            min="0"
-            value="0"
-          />
-        </div>
-        <button class="button" onclick="calculate()">Sprawdź</button>
-        <div
-          onclick="stop()"
-          class="papa"
-          style="display: none"
-          id="stopButton"
-        >
-          <img
-            src="https://assets.puzzlefactory.com/puzzle/293/329/original.webp"
-            alt="papa"
-          />
+        <div id="taxes" class="taxes">
+          <div id="taxRate1Container" class="input">
+            <label for="taxRate1">Podatek (%)</label>
+            <input id="taxRate1" type="number" step="0.01" min="0" />
+          </div>
+          <div id="taxRate2Container" class="input">
+            <label for="taxRate2">Podatek (%)</label>
+            <input id="taxRate2" type="number" step="0.01" min="0" />
+          </div>
+          <div id="taxRateDrawContainer" class="input">
+            <label for="taxRateDraw">Podatek (%)</label>
+            <input id="taxRateDraw" type="number" step="0.01" min="0" />
+          </div>
         </div>
       </div>
+
       <div id="results" class="results">
         <span>Kwota zysku: <span id="netProfit">0.00</span> zł</span>
         <span>Stawka na pierwszy kurs: <span id="stake1">0.00</span></span>
@@ -81,6 +105,7 @@
         Your browser does not support the audio element.
       </audio>
     </div>
+
     <script src="calc.js"></script>
   </body>
 </html>

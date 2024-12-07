@@ -1,22 +1,50 @@
 let audio = null;
+let taxMode = "common";
 
-function calculateSurebet(odd1, odd2, oddDraw = null, budget, taxRate = 0) {
+function toggleTaxInputs() {
+  const taxMode = document.getElementById("taxMode").value;
+  const isSeparate = taxMode === "separate";
+
+  document.getElementById("taxes").style.display = isSeparate ? "flex" : "none";
+}
+
+function calculateSurebet(
+  odd1,
+  odd2,
+  oddDraw = null,
+  budget,
+  taxRate = 0,
+  taxRate1 = null,
+  taxRate2 = null,
+  taxRateDraw = null
+) {
   const surebetValue = oddDraw
     ? 1 / odd1 + 1 / odd2 + 1 / oddDraw
     : 1 / odd1 + 1 / odd2;
 
+  // Obliczenie stawek na poszczególne kursy
   const stake1 = budget / odd1 / surebetValue;
   const stake2 = budget / odd2 / surebetValue;
   const stakeDraw = oddDraw ? budget / oddDraw / surebetValue : 0;
 
-  const win1 = stake1 * odd1 * (1 - taxRate / 100);
-  const win2 = stake2 * odd2 * (1 - taxRate / 100);
-  const winDraw = oddDraw ? stakeDraw * oddDraw * (1 - taxRate / 100) : 0;
+  // Uwzględnienie podatków indywidualnych
+  const tax1 = taxRate1 !== null ? taxRate1 : taxRate;
+  const tax2 = taxRate2 !== null ? taxRate2 : taxRate;
+  const taxDraw = taxRateDraw !== null ? taxRateDraw : taxRate;
 
-  const netProfit = oddDraw
-    ? Math.min(win1, win2, winDraw) - budget
-    : Math.min(win1, win2) - budget;
+  console.log("tax1: ", tax1);
+  console.log("tax2: ", tax2);
+  // Obliczenie wygranych po podatkach
+  const win1 = stake1 * odd1 * (1 - tax1 / 100);
+  const win2 = stake2 * odd2 * (1 - tax2 / 100);
+  const winDraw = oddDraw ? stakeDraw * oddDraw * (1 - taxDraw / 100) : 0;
+  console.log("win1: ", win1);
+  console.log("win2: ", win2);
+  // Znalezienie minimalnej wygranej netto
+  const netWin = oddDraw ? Math.min(win1, win2, winDraw) : Math.min(win1, win2);
+  console.log("netWin", netWin);
 
+  const netProfit = netWin - budget;
   const profitPercent = (netProfit / budget) * 100;
 
   return {
@@ -72,18 +100,32 @@ function calculate() {
   }
 
   if (!validateInputs()) {
-    return; // Zatrzymaj dalsze wykonanie, jeśli walidacja się nie powiedzie
+    return;
   }
 
   const odd1 = parseFloat(document.getElementById("type1").value);
   const odd2 = parseFloat(document.getElementById("type2").value);
   const oddDraw = parseFloat(document.getElementById("typeDraw").value) || null;
   const budget = parseFloat(document.getElementById("budget").value);
-  console.log(document.getElementById("taxRate").value);
 
+  const taxRate1 =
+    parseFloat(document.getElementById("taxRate1").value) || null;
+  const taxRate2 =
+    parseFloat(document.getElementById("taxRate2").value) || null;
+  const taxRateDraw =
+    parseFloat(document.getElementById("taxRateDraw").value) || null;
   const taxRate = parseFloat(document.getElementById("taxRate").value);
 
-  const result = calculateSurebet(odd1, odd2, oddDraw, budget, taxRate);
+  const result = calculateSurebet(
+    odd1,
+    odd2,
+    oddDraw,
+    budget,
+    taxRate,
+    taxRate1,
+    taxRate2,
+    taxRateDraw
+  );
 
   // Aktualizacja treści w HTML
   document.getElementById("results").style.display = "flex";
