@@ -6,6 +6,9 @@ function toggleTaxInputs() {
   const isSeparate = taxMode === "separate";
 
   document.getElementById("taxes").style.display = isSeparate ? "flex" : "none";
+  document.getElementById("taxRateContainer").style.display = isSeparate
+    ? "none"
+    : "block";
 }
 
 function calculateSurebet(
